@@ -13,6 +13,16 @@ router.get("/subjects", async (req, res) => {
   }
 });
 
+//GET - gets all subjects
+router.get("/comments", async (req, res) => {
+  try {
+    const response = await Comment.find();
+    res.status(200).json(response);
+  } catch (e) {
+    res.status(500).json({ message: e });
+  }
+});
+
 //POST - create a subject
 router.post("/subjects", isAuthenticated, async (req, res) => {
   try {
