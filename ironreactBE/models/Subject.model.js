@@ -4,7 +4,7 @@ const subjectSchema = new Schema({
   title: String,
   description: String,
   imageUrl: String,
-  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+ // comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 module.exports = model("Subject", subjectSchema);

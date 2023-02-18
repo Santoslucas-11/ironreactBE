@@ -1,4 +1,4 @@
-const { isAuthenticated } = require('../middlewares/jwt.middleware');
+const { isAuthenticated } = require("../middlewares/jwt.middleware");
 const Comment = require("../models/Comment.model");
 const router = require("express").Router();
 const Subject = require("../models/Subject.model");
@@ -40,7 +40,7 @@ router.post("/comments", isAuthenticated, async (req, res) => {
       res.status(400).json({ message: "missing fields" });
       return;
     }
-    const response = await Comment.create({ title, description });
+    const response = await Comment.create({ title, description, userId });
     res.status(200).json(response);
   } catch (e) {
     res.status(500).json({ message: e });
@@ -48,7 +48,7 @@ router.post("/comments", isAuthenticated, async (req, res) => {
 });
 
 //DELETE - delete a comment
-router.delete("/comment/:commentId", async (req, res) => {
+router.delete("/comments/:commentId", async (req, res) => {
   try {
     await Comment.findByIdAndDelete(req.params.projectId);
     res
@@ -60,7 +60,7 @@ router.delete("/comment/:commentId", async (req, res) => {
 });
 
 //GET ONE subject
-router.get("/subject/:subjectId", async (req, res) => {
+router.get("/subjects/:subjectId", async (req, res) => {
   try {
     const response = await Subject.findById(req.params.subjectId);
     res.status(200).json(response);
